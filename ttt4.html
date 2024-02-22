@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe</title>
+<style>
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 5px;
+  background-color: green;
+  justify-content: center;
+}
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.square:hover {
+  background-color: lightgrey;
+}
+.title { 
+  text-align: center;
+  border: 1px solid blue;
+}
+</style>
+</head>
+<body>
+    <h1 class="title">Tic Tac Toe 4!!</h1>
+    <div id="playerTurn" class="title">It is player X's Turn</div>
+    <div id="winner" class="title">Player ___ is the winner</div>
+  
+<div id="board" class="board"></div> 
+
+<script>
+  const NUM_SQUARES = 9;
+  const boardElement = document.getElementById('board'); 
+  let currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; // Randomly choose whether X or O will start.
+  document.getElementById('playerTurn').innerText = `It is player ${currentPlayer}'s Turn`;
+
+  for (let i = 0; i < NUM_SQUARES; i++) {
+    const id = "sq" + i;
+    const square = document.createElement('div'); 
+    square.className = 'square'; 
+    square.id = id; 
+
+    square.addEventListener('click', function() {
+      if (this.innerHTML === '') { // Only update if the square is empty
+        this.innerHTML = currentPlayer; // Place the current player 
+        // Toggle the current player
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        document.getElementById('playerTurn').innerText = `It is player ${currentPlayer}'s Turn`;
+      }
+    });
+    boardElement.appendChild(square); 
+  }
+</script>
+
+</body>
+</html>
