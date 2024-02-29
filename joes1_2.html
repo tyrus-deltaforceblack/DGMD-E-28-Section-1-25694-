@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe's Hotdogz Menu </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .menu {
+            background: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Joe's Hotdogz</h1>
+
+<div id="menuJson" class="menu"></div>
+<div id="menuArray" class="menu"></div>
+
+<script>
+// Part 1: Create representations of the items and prices
+
+// 1. Associative Array (Using in JavaScript as an Object)
+const menuItemsPrices = {
+    hotdogs: 4,
+    fries: 3.5,
+    soda: 1.5,
+    sauerkraut: 1
+};
+
+// 2. JSON Object
+const menuJson = '{"menu":[{"item":"Hotdogs","price":4},{"item":"Fries","price":3.5},{"item":"Soda","price":1.5},{"item":"Sauerkraut","price":1}]}';
+
+// 3. Function Object
+function MenuItem(item, price) {
+    this.item = item;
+    this.price = price;
+}
+
+const menuArray = [
+    new MenuItem("Hotdogs", 4),
+    new MenuItem("Fries", 3.5),
+    new MenuItem("Soda", 1.5),
+    new MenuItem("Sauerkraut", 1)
+];
+
+// Part 2: Display functions
+
+// Display using JSON Object
+function displayMenuFromJson() {
+    const menuObject = JSON.parse(menuJson);
+    let menuHtml = '<ul>';
+    menuObject.menu.forEach(function(menuItem) {
+        menuHtml += `<li>${menuItem.item}: $${menuItem.price}</li>`;
+    });
+    menuHtml += '</ul>';
+    document.getElementById('menuJson').innerHTML = menuHtml;
+}
+
+// Display using Array of Objects
+function displayMenuFromArray() {
+    let menuHtml = '<ul>';
+    menuArray.forEach(function(menuItem) {
+        menuHtml += `<li>${menuItem.item}: $${menuItem.price}</li>`;
+    });
+    menuHtml += '</ul>';
+    document.getElementById('menuArray').innerHTML = menuHtml;
+}
+
+// Initialize menu displays
+window.onload = function() {
+    displayMenuFromJson();
+    displayMenuFromArray();
+};
+</script>
+</body>
+</html>
+
